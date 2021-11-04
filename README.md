@@ -24,5 +24,5 @@ Apenas uma simples demonstração de um bot de música utlizando o DiscordJS v13
 -  `/pause` - Pausar ou despausar a música atual.
 -  `/resume` - Pausar ou despausar a música atual.
 
-## ⚠️ Observações:
+## ⚠️ Observações
 - Caso você encontre bugs ou quer melhorar algo nesses códigos de exemplos ou na explicação, sinta-se a vontade para abrir uma issue ou um PR.
