@@ -27,10 +27,7 @@ const config = require('./config.json')
 const client = new Discord.Client({ intents: ['GUILD_VOICE_STATES', 'GUILDS'] })
 
 // Lista dos players, cada guilda tem um player
-// É possível pegar um player usando players.get(ID DA GUILDA)
-/** @typedef {{ title: string, url: string, thumbnail: string, duration: string, author: string, requester: Discord.User }} Track */
-/** @typedef { { id: string, channel: Discord.TextChannel, lock: boolean, queue: [Track], current: Track, connection: voice.VoiceConnection, dispatcher: voice.AudioPlayer, handleQueue(), destroy() }} Player */
-/** @type {Map<string, Player>} */
+// É possível pegar um player usando players.get("ID da Guilda")
 const players = new Map();
 
 // Nós esttamos usando um Regex para validar se já é uma URL do YouTube ou não.
@@ -67,7 +64,6 @@ client.on('interactionCreate', async(i) => {
         const args = i.options.getString("nome")
         
         // Pegar o canal de voz que a pessoa estiver conectada na guilda
-        /** @type {Discord.VoiceState} */
         const { channel } = i.member.voice
 
         // Se o canal de voz for undefined ou null, então siginifica que ele não está em nenhum canal.
@@ -166,13 +162,6 @@ client.on('interactionCreate', async(i) => {
 
 });
 
-/**
- * 
- * @param {voice.VoiceConnection} connection 
- * @param {string} guildId
- * @param {Discord.TextChannel} channel 
- * @return {Player} Objeto player já registrado no Map de Players
- */
 async function newPlayer(guildId, channel, connection) {
 
     const dispatcher = voice.createAudioPlayer() // Player interno do DiscordJS
@@ -180,7 +169,6 @@ async function newPlayer(guildId, channel, connection) {
 
     // Criando uma variavel player, que é um objeto que contêm as informações que precisamos.
     // ID da Guilda, O objeto de canal de Texto, e uma variavel para sabermos se o player já está carregando algo, player interno do discord.js, e a fila da guilda
-    /** @type {Player} player */
     const player = { id: guildId, channel: channel, lock: false, connection: connection, dispatcher: dispatcher, queue: [] }
 
     player.handleQueue = async function() {
